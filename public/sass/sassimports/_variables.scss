@@ -1,0 +1,159 @@
+//VARIABLES
+//=======================
+	$text-size-menu:20px;
+	$text-fontstack:"Agency FB",arial;
+	$text-color-default:white;
+	$login-font-stack: "Arial", serif sans;
+	$color-light-green:#42FF42;
+
+	$color-ocean:#29ABE2;
+	$color-title:white;
+	$color-dark-gras:#006837;
+	$color-light-gray:#E0E0E0;
+	$color-sand:#FFC36E;
+
+	//blue
+	$color-blue-1:$color-ocean;
+
+	//green
+	$color-green-4:$color-dark-gras;
+
+	$image-island-green-width:215px;
+	$image-island-green-height:341px;
+	$image-island-wave-width: 336px;
+	$image-island-wave-height: 392px;
+	$image-island-sand-width: 242px;
+	$image-island-sand-height: 346px;
+
+
+	%input-text{
+ 		-webkit-appearance: none;
+		display: block;
+		
+		margin:10px 0 10px 0;
+		padding:5px;
+		
+		width:100%;
+
+		background-color: transparent;
+		
+		font-size:20px;
+		color:white;
+		line-height: 50px;
+		
+		border:none;
+		border-bottom: 2px solid $color-light-gray;
+		&:focus{
+			outline:0;
+			box-shadow:none;
+			border-bottom: 2px solid green;
+		} 
+	}
+
+	%link-default{
+		color:$text-color-default;
+		text-decoration: none;
+		&:hover{
+			text-decoration: underline red;
+		}
+	}
+
+	%links{
+		display: block;
+		margin-top:30px;
+		color:$color-light-gray;
+		text-decoration:none;
+	}
+
+	%button-style{
+		background-color:transparent;
+		color: $color-light-gray;
+		border:0;
+		border: 2px solid $color-light-gray;
+		width: 100%;
+		right:20px;
+		margin-top: 50px;
+
+		opacity: 0.7;
+		font-size: 20px;
+		&:hover{
+			opacity: 1.0;
+		}
+	}
+
+	%block-centered-hor{
+		display: block;
+		margin-right:auto;
+		margin-left:auto;
+	}
+
+	%button-default {
+		padding: 4px;
+		cursor:pointer;
+		border:none;
+		shadow:none;
+		display:block;
+	}
+
+	%clear-padd-marg{
+		margin:0;
+		padding:0;
+	}
+
+	%select-none{
+		-webkit-user-select: none;// Chrome all / Safari all
+		-moz-user-select: none; // mozilla browsers
+			-khtml-user-select: none; // webkit browsers
+	}
+
+
+	%centered-height{
+		display: table-cell;
+	  vertical-align: middle; //Vertically centered
+	  text-align: center; //Horizontally centered
+	}
+
+	%background{
+		display: block;
+		padding: 20px;
+		background-color:$color-ocean;
+		height:100%;
+	}
+
+	%background-2{
+		position:absolute;
+		top:0;
+		left:0;
+		height:100%;
+		width:100%;
+	}
+
+
+
+
+	//FUNCTIONS
+	//===================================
+
+	//usage:
+	//	.parent { position: relative; }
+	// .child { @include centerer; }
+	@mixin centerer {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	//usage:
+	//.overlay { 	@include coverer;
+	//					background: rgba(black, 0.5);
+	//					z-index: 1000;}
+	@mixin coverer {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+

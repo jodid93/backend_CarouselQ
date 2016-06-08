@@ -1,0 +1,42 @@
+div.middle a {
+  display: block;
+  margin-top: 30px;
+  color: #E0E0E0;
+  text-decoration: none; }
+
+div.middle {
+  display: block;
+  margin-right: auto;
+  margin-left: auto; }
+
+.login {
+  display: block;
+  padding: 20px;
+  background-color: #29ABE2;
+  height: 100%; }
+
+.login {
+  padding: 20px;
+  font-family: "Arial", serif sans;
+  color: white;
+  display: block; }
+  .login h1 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 120px; }
+
+div.middle {
+  max-width: 250px;
+  color: white;
+  overflow: hidden;
+  /*button{
+		@extend %button-style;
+		//width: 100%;
+		//right:20px;
+		//margin-top: 50px;
+		 
+		//font-size: 20px;
+	}*/ }
+  div.middle ::-webkit-input-placeholder {
+    color: #E0E0E0;
+    font-style: "Agency FB", arial; }

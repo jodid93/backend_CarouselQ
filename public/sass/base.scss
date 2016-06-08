@@ -1,0 +1,118 @@
+//@import 'sassimports/variables';
+
+*{
+	-border: 1px solid red;
+}
+//VARIABLES
+//=======================
+	$text-size-menu:20px;
+	$text-fontstack:"Agency FB",arial;
+	$text-color-default:white;
+
+	$color-green: green;
+
+
+	%links{
+		display: block;
+		margin-top:30px;
+		color:gray;
+		text-decoration:none;
+	}
+
+
+	%centered-height{
+		display: table-cell;
+	  vertical-align: middle; //Vertically centered
+	  text-align: center; //Horizontally centered
+	}
+
+
+
+	//FUNCTIONS
+	//===================================
+
+	//usage:
+	//	.parent { position: relative; }
+	// .child { @include centerer; }
+	@mixin centerer {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	//usage:
+	//.overlay { 	@include coverer;
+	//					background: rgba(black, 0.5);
+	//					z-index: 1000;}
+	@mixin coverer {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+
+
+/* BASES
+==================================*/
+
+html{
+	background-color:green;
+	height: 100%;
+  	z-index: 400;
+}
+
+
+body{
+	min-height:100%;
+	word-wrap: break-word;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	color:$text-color-default;
+	padding:20px;
+}
+
+button{
+	cursor:pointer;
+}
+
+a{
+	@extend %links;
+}
+
+
+/*SETTINGS
+===================================*/
+	
+
+/* LOGIN | CREATE USER
+===============================*/
+
+
+/* MENU
+================================*/
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+	
+  	/*login/creat
+  	=========================*/
+	div.login{ 
+		h1{
+			font-size:80px;
+		}
+	}
+
+	/*menu
+	====================*/
+	body > div.menu{
+		h1{
+			font-size: 60px;
+		}
+		width: 100%;
+		padding:0;
+		overflow: hidden;
+	}
+}

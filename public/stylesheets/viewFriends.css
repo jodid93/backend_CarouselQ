@@ -1,0 +1,12 @@
+#view-friends button[type="submit"] {
+  margin: 0; }
+
+#view-friends form {
+  margin: 45px 0 45px 0;
+  text-align: left; }
+
+#view-friends p {
+  margin: 0 10px 0 10px !important;
+  display: inline-block;
+  margin: 0 0 0 0;
+  font-size: 40px; }

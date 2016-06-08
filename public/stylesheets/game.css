@@ -1,0 +1,243 @@
+button.game-exit, button.game-lvl-2-coconutHeap {
+  padding: 4px;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  shadow: none;
+  display: block; }
+
+body {
+  margin: 0 !important; }
+
+#myCanvas {
+  border: 0 !important; }
+
+div.circle-buttons .upgrade, div.circle-buttons button.gamebtn-settings {
+  margin: 20px 0 0 0; }
+
+div.arrow-up:before {
+  display: block;
+  height: 100px;
+  width: 100px;
+  border: 1px solid red; }
+
+div.circle-buttons {
+  z-index: 0;
+  top: 50px;
+  right: 10px;
+  position: absolute;
+  display: block;
+  width: 100px;
+  height: auto; }
+  div.circle-buttons .upgrade {
+    cursor: pointer;
+    transform: rotate(0deg);
+    outline: 0;
+    border: 0;
+    display: block;
+    width: 72px;
+    height: 72px;
+    background: url("../game/images/game-button-upgrade.png") no-repeat;
+    transition: transform 0.1s; }
+    div.circle-buttons .upgrade:active {
+      opacity: 0.5; }
+    div.circle-buttons .upgrade:hover {
+      transform: rotate(-60deg); }
+  div.circle-buttons button.gamebtn-settings {
+    /*@extend %button-default;
+		position: absolute;
+		top:40;
+		left:40;
+		width: $button-upgrade-width;
+		height: $button-upgrade-heigth;
+		background:url('../game/images/game-button-exit.png') no-repeat;
+	*/
+    cursor: pointer;
+    visibility: visible;
+    outline: 0;
+    border: 0;
+    display: block;
+    width: 72px;
+    height: 72px;
+    background: url("../game/images/game-button-settings.png") no-repeat;
+    transition: transform 0.5s; }
+    div.circle-buttons button.gamebtn-settings:active {
+      opacity: 2s; }
+    div.circle-buttons button.gamebtn-settings:hover {
+      transform: rotate(-270deg); }
+
+/*
+button.game-exit{
+	@extend %button-default;
+	position: absolute;
+	top:20;
+	left:20;
+	width:$game-button-exit-width;
+	height:$game-button-exit-width;
+	background:url('../game/images/game-button-exit.png') no-repeat;
+}*/
+div.arrows-buttons button.level-down, div.arrows-buttons button.level-up {
+  display: block;
+  position: absolute;
+  left: 45%;
+  font-size: 100px;
+  color: #E0E0E0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  opacity: 0.3;
+  transition: transform 0.1s; }
+  div.arrows-buttons button.level-down:hover, div.arrows-buttons button.level-up:hover {
+    opacity: 1.0; }
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important; }
+
+div.arrows-buttons button.level-down {
+  top: 80%;
+  transition: transform 0.1s; }
+  div.arrows-buttons button.level-down:active {
+    transform: translate(0, 10px); }
+
+div.arrows-buttons button.level-up {
+  top: 10px;
+  transition: transform 0.1s; }
+  div.arrows-buttons button.level-up:active {
+    transform: translate(0, -10px); }
+
+button.quit {
+  position: absolute;
+  right: 50%;
+  top: 10;
+  display: block;
+  height: 42;
+  width: 42;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  background: url("../game/images/game-button-exit.png") no-repeat;
+  z-index: 20; }
+  button.quit:hover {
+    opacity: 0.7; }
+
+/*
+div.upgrade{
+	@include centerer;
+	display:block;
+	height:95%;
+	width:95%;
+	background-color:$color-ocean;
+	border:4px solid $color-light-gray;
+	z-index:10;
+	-webkit-transition-property:all; 
+	transition-duration:5s;
+}
+*/
+div.upgrade, div.upgrade-show, div.settings, div.settings-show {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 97%;
+  width: 97%;
+  display: block;
+  background-color: #29ABE2;
+  border: 4px solid #E0E0E0;
+  z-index: -10;
+  -webkit-transition: visibility 0s, opacity 300ms; }
+
+div.upgrade {
+  visibility: hidden;
+  opacity: 0; }
+
+div.upgrade-show {
+  visibility: visible;
+  opacity: 1; }
+
+div.settings {
+  visibility: hidden;
+  opacity: 0; }
+
+div.settings-show {
+  visibility: visible;
+  opacity: 1; }
+
+/*
+.fadeIn {
+	visibility: hidden;
+  opacity: 1;
+  transition: visibility 1s;
+}*/
+div#myCanvas {
+  z-index: 100 !important; }
+
+div.sky {
+  left: 0;
+  top: 0;
+  height: 70%;
+  width: 100%;
+  position: absolute;
+  z-index: -20; }
+
+div.sea, div.mine-floor {
+  top: 70%;
+  height: 30%;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  z-index: -20; }
+
+div.backgrounds {
+  /*position: absolute;
+	display:block;
+	background-color:black;
+	height:100%;
+	width:100%;*/ }
+
+div.sky {
+  background: -webkit-linear-gradient(top, #005b97 0%, #077ec3 20%, #53b1e0 56%, #98cceb 77%, #c8dff3 97%, #cce0f4 100%);
+  background: -o-linear-gradient(top, #005b97 0%, #077ec3 20%, #53b1e0 56%, #98cceb 77%, #c8dff3 97%, #cce0f4 100%);
+  background: -ms-linear-gradient(top, #005b97 0%, #077ec3 20%, #53b1e0 56%, #98cceb 77%, #c8dff3 97%, #cce0f4 100%);
+  background: -moz-linear-gradient(top, #005b97 0%, #077ec3 20%, #53b1e0 56%, #98cceb 77%, #c8dff3 97%, #cce0f4 100%);
+  background: linear-gradient(to bottom, #005b97 0%, #077ec3 20%, #53b1e0 56%, #98cceb 77%, #c8dff3 97%, #cce0f4 100%); }
+
+div.sea {
+  background-color: #29ABE2; }
+
+div.mine-wall {
+  top: 0;
+  height: 100%;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  z-index: -20;
+  background: url("../game/images/game-background-cave.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
+html.level-2-background-mine {
+  /*	background: url('../game/images/game-background-cave.png');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  z-index: 400;*/ }
+
+button.game-exit {
+  position: absolute;
+  top: 20;
+  left: 20;
+  width: 42;
+  height: 42;
+  background: url("../game/images/game-button-exit.png") no-repeat; }
+
+button.game-lvl-2-coconutHeap {
+  position: absolute;
+  top: 20;
+  left: 150;
+  width: 381;
+  height: 356;
+  background: url("../game/images/game-coconut-heap.png") no-repeat; }

@@ -1,0 +1,116 @@
+a {
+  color: white;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline red; }
+
+a {
+  display: block;
+  margin-top: 30px;
+  color: #E0E0E0;
+  text-decoration: none; }
+
+button {
+  background-color: transparent;
+  color: #E0E0E0;
+  border: 0;
+  border: 2px solid #E0E0E0;
+  width: 100%;
+  right: 20px;
+  margin-top: 50px;
+  opacity: 0.7;
+  font-size: 20px; }
+  button:hover {
+    opacity: 1.0; }
+
+label {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none; }
+
+h1 {
+  text-align: center; }
+
+div.formgroup {
+  position: relative;
+  display: block;
+  padding: 8px;
+  height: 50px;
+  margin: 30px 0 30px 0;
+  text-align: left; }
+
+.container-slider {
+  float: left;
+  height: 30px;
+  display: inline-block; }
+
+#input-slider {
+  float: right; }
+
+.audio-off {
+  opacity: 0.5; }
+
+#checkbox-on, #checkbox-off {
+  width: 15px;
+  height: 15px;
+  float: right;
+  border: 3px solid #E0E0E0;
+  cursor: pointer; }
+
+#checkbox-on, #check-on {
+  background-color: #FFC36E; }
+
+#checkbox-off, #check-off, #label-check-off {
+  opacity: 0.5;
+  background-color: transparent; }
+
+input[type=checkbox] {
+  visibility: hidden; }
+
+label {
+  cursor: pointer;
+  width: 100%;
+  padding: 4px;
+  border: 3px solid #E0E0E0;
+  color: #E0E0E0; }
+
+input[type=range] {
+  -webkit-appearance: none;
+  height: 2px;
+  border: 1px solid #bdc3c7; }
+
+input[type='range']::-moz-range-track {
+  border-radius: 5px;
+  background-color: white;
+  height: 2px;
+  outline: 0;
+  border: 1px dotted transparent !important;
+  border-radius: 0; }
+
+input[type='range']::-moz-range-thumb {
+  border: 0;
+  width: 6px;
+  height: 25px;
+  border-radius: 0;
+  cursor: pointer; }
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: #ecf0f1;
+  border: 1px solid #bdc3c7;
+  width: 6px;
+  height: 20px;
+  cursor: pointer; }
+
+input:focus,
+input:active {
+  outline: 0; }
+
+p {
+  text-align: center;
+  display: inline;
+  margin-left: 10px; }
+
+input[type='text'].audio-slider-hidden {
+  visibility: hidden;
+  position: absolute; }
