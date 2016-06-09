@@ -12,6 +12,7 @@ var xss = require('xss');
 ////
 
 router.get('/', homePage);
+router.post('/', addRandomUser);
 
 //TEMP MEHTOD SOLUTION
 function homePage(req, res, next){
@@ -29,6 +30,32 @@ function homePage(req, res, next){
                      title: 'test'});
 }
 
+function addRandomUser(req, res, next){
+  console.log('adding a random user');
+  sql.addRandomUser(function(error){
+    if(error){
+      console.log('MARRAFACCA',error);
+    }
+  });
+
+  var resData
+
+  sql.getRandomUser(function(error, data){
+    if(error){
+      console.log('SHIIIIIIT',error)
+    }else{
+      resData = data;
+      console.log(resData);
+
+      resData = {user: 'still a dichhead',
+                 title: 'test',
+                 userExsist: true,
+                 randomUser: 'johannes'}
+    }
+  });
+  res.render('menu', {user: 'allt ónýtt',
+                     title: 'test'});
+}
 ////
 //AUTHERATION / CREATE USER
 ////
