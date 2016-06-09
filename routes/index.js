@@ -25,7 +25,7 @@ function homePage(req, res, next){
     //res.render('login', { title: 'Log In' });
   });
   console.log("ertu hér");
-  res.render('menu',{user: 'dickhead',
+  res.render('menu',{user: 'dickhead númer 2',
                      title: 'test'});
 }
 
