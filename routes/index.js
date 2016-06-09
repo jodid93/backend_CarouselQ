@@ -16,6 +16,7 @@ router.get('/', homePage);
 //TEMP MEHTOD SOLUTION
 function homePage(req, res, next){
   //Initialize tables and then render main screen
+  console.log(sql);
   sql.createTables( function(error){
     if( error ){
       console.log(error);
@@ -23,7 +24,8 @@ function homePage(req, res, next){
     //res.redirect('/login');
     //res.render('login', { title: 'Log In' });
   });
-  res.render('menu',{user: 'josua',
+  console.log("ertu hér");
+  res.render('menu',{user: 'dickhead',
                      title: 'test'});
 }
 
