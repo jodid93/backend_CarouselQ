@@ -1,0 +1,6 @@
+h1 vertu velkominn #{user}
+	form(method='post', action='/')
+		div: button(type='submit') Add random user
+
+	if userExsist
+		h1 #{randomUser} has been added
