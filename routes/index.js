@@ -13,6 +13,7 @@ var xss = require('xss');
 
 router.get('/', homePage);
 router.post('/', addRandomUser);
+router.get('/testConnection', testConnection);
 
 //TEMP MEHTOD SOLUTION
 function homePage(req, res, next){
@@ -55,6 +56,17 @@ function addRandomUser(req, res, next){
   });
   res.render('menu', {user: 'allt ónýtt',
                      title: 'test'});
+}
+
+/*
+  for Testing: http://localhost:8080/testConnection
+  for Raun   : https://carousel-q.herokuapp.com/testConnection
+*/
+function testConnection(req, res, next){
+  console.log('prepping response to server');
+  
+  res.setHeader('Content-Type', 'application/json');
+  res.json({"foo": "bar"});
 }
 ////
 //AUTHERATION / CREATE USER
