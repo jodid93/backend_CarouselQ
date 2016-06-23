@@ -15,10 +15,22 @@ router.get('/', homePage);
 router.post('/', addRandomUser);
 router.get('/testConnection', testConnection);
 
+router.get('/initDB', initializeDB, homePage);
+
+function initializeDB(req, res, next){
+  sql.createTables(function (error){
+    if(error){
+      console.log(error);
+    }
+  });
+  console.log('töflur ættu að vera komnar');
+  next();
+}
+
 //TEMP MEHTOD SOLUTION
 function homePage(req, res, next){
   //Initialize tables and then render main screen
-  console.log(sql);
+  /*console.log(sql);
   sql.createTables( function(error){
     if( error ){
       console.log(error);
@@ -26,7 +38,7 @@ function homePage(req, res, next){
     //res.redirect('/login');
     //res.render('login', { title: 'Log In' });
   });
-  console.log("ertu hér");
+  console.log("ertu hér");*/
   res.render('menu',{user: 'dickhead númer 2',
                      title: 'test'});
 }
