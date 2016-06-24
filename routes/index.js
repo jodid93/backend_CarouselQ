@@ -14,8 +14,14 @@ var xss = require('xss');
 router.get('/', homePage);
 router.post('/', addRandomUser);
 router.get('/testConnection', testConnection);
+router.get('/addNewUser3/:name/:hash/:id', addNewUser);
 
-router.get('/initDB', initializeDB, homePage);
+router.get('/initDB', initializeDB);
+
+function addNewUser(req, res, next){
+  console.log('userName = '+req.params.name);//+' hash = '+req.param.hash+'  id = '+req.param.id);
+  res.redirect('/');
+}
 
 function initializeDB(req, res, next){
   sql.createTables(function (error){
@@ -24,7 +30,7 @@ function initializeDB(req, res, next){
     }
   });
   console.log('töflur ættu að vera komnar');
-  next();
+  res.json({"status": "good"});
 }
 
 //TEMP MEHTOD SOLUTION
