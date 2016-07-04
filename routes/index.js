@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var sql = require('../lib/DBConnector');
-//var ensureUser = require('../lib/ensureLoggedIn');
+var ensureUser = require('../lib/ensureLoggedIn');
 var xss = require('xss');
 
 //var defaultSettings = require('../lib/defaultSettings');
@@ -12,14 +12,27 @@ var xss = require('xss');
 ////
 
 router.get('/', homePage);
-router.post('/', addRandomUser);
-router.get('/testConnection', testConnection);
-router.get('/addNewUser3/:name/:hash/:id', addNewUser);
+//router.post('/', addRandomUser);
+//router.get('/testConnection', testConnection);
+router.get('/addNewUser/:name/:hash/:id', addNewUser);
 
 router.get('/initDB', initializeDB);
 
 function addNewUser(req, res, next){
-  console.log('userName = '+req.params.name);//+' hash = '+req.param.hash+'  id = '+req.param.id);
+
+  if(req.params.id.length > 9){
+    console.log('stop trying to break my app >:('); 
+    res.json({"status": "bad"})
+    res.redirect('/');
+  }
+
+  sql.addNewUser(xss(req.params.name), xss(req.params.id), xss(req.params.hash), function(error){
+    if(error){
+      console.log(error);
+    }
+  });
+
+  res.json({"status": "good"})
   res.redirect('/');
 }
 
