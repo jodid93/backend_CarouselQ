@@ -15,8 +15,25 @@ router.get('/', homePage);
 //router.post('/', addRandomUser);
 //router.get('/testConnection', testConnection);
 router.get('/addNewUser/:name/:hash/:id', addNewUser);
+router.get('/doesQueueExist/:queueId', doesQueueExist);
 
 router.get('/initDB', initializeDB);
+
+function doesQueueExist(req, res, next){
+  sql.doesQExist(xss(req.params.queueId), function(error, data){
+    if(error){
+      console.log(error, 'fokk');
+    }else{
+        console.log('herna er data hahahaha     ',data);
+      if(data.rowCount === 1){
+        console.log('status á að vera true');
+        res.json({"status": "true"});
+      }else{
+        res.json({"status": "false"});
+      }
+    }
+  });
+}
 
 function addNewUser(req, res, next){
 
