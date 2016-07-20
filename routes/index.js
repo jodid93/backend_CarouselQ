@@ -14,7 +14,7 @@ var xss = require('xss');
 router.get('/', homePage);
 //router.post('/', addRandomUser);
 //router.get('/testConnection', testConnection);
-router.get('/addNewUser/:name/:hash/:id', addNewUser);
+router.get('/addNewUser/:name/:hash/:id/:owner', addNewUser);
 router.get('/doesQueueExist/:queueId', doesQueueExist);
 
 router.get('/initDB', initializeDB);
@@ -43,7 +43,7 @@ function addNewUser(req, res, next){
     res.redirect('/');
   }
 
-  sql.addNewUser(xss(req.params.name), xss(req.params.id), xss(req.params.hash), function(error){
+  sql.addNewUser(xss(req.params.name), xss(req.params.id), xss(req.params.hash), xss(req.params.owner), function(error){
     if(error){
       console.log(error);
     }
