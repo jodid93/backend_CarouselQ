@@ -18,6 +18,17 @@ router.get('/addNewUser/:name/:hash/:id/:owner', addNewUser);
 router.get('/doesQueueExist/:queueId', doesQueueExist);
 
 router.get('/initDB', initializeDB);
+router.get('/makeUserInactive/:hash',makeUserInactive)
+
+function makeUserInactive(req, res, next){
+  sql.makeUserInactive(xss(req.params.hash), function(error){
+    if(error){
+      console.log(error)
+    }else{
+      res.json({"status":"good"});
+    }
+  })
+}
 
 function doesQueueExist(req, res, next){
   sql.doesQExist(xss(req.params.queueId), function(error, data){
@@ -48,7 +59,9 @@ function addNewUser(req, res, next){
       console.log(error);
     }
   });
-
+  req.session.regenerate(function (){
+      req.session.user = xss(req.params.hash);
+    });
   res.json({"status": "good"})
   res.redirect('/');
 }
