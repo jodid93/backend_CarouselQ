@@ -18,7 +18,18 @@ router.get('/addNewUser/:name/:hash/:id/:owner', addNewUser);
 router.get('/doesQueueExist/:queueId', doesQueueExist);
 
 router.get('/initDB', initializeDB);
-router.get('/makeUserInactive/:hash',makeUserInactive)
+router.get('/makeUserInactive/:hash',makeUserInactive);
+router.get('/addSongToQueue/:hashName/:trackUri/:trackName/:trackBand/:trackDur', addSongToQueue);
+
+function addSongToQueue(req, res, next){
+  sql.addSongToQueue(xss(req.params.hashName),xss(req.params.trackUri),xss(req.params.trackName),xss(req.params.trackBand),xss(req.params.trackDur), function(error){
+    if(error){
+      console.log(error)
+    }else{
+      res.json({"status":"good"});
+    }
+  })
+}
 
 function makeUserInactive(req, res, next){
   sql.makeUserInactive(xss(req.params.hash), function(error){
