@@ -21,6 +21,52 @@ router.get('/initDB', initializeDB);
 router.get('/makeUserInactive/:hash',makeUserInactive);
 router.get('/addSongToQueue/:hashName/:trackUri/:trackName/:trackBand/:trackDur', addSongToQueue);
 
+router.get('/getQueue/:queueid', getQueue);
+
+function getQueue(req, res, next){
+  
+  var syncer = 0;
+  var syncChecker = 0;
+
+  sql.getUsersInQueue(xss(req.params.queueid), function(error, data){
+    if(error){
+      console.log(error)
+    }else{
+      syncer = data.rows.length;
+      var tracks = {};
+      for(var i = 0; i<data.rows.length; i++){
+        var user = {};
+        user.name = data.rows[i].userinfo_name;
+        sql.getUserSongs(data.rows[i].userinfo_hashnameid, function(error, innerData){
+          if(error){
+            console.log(error)
+          }else{
+            syncChecker++;
+            for(var u = 0; u<innerData.rows.length; u++){
+              user.track = innerData.rows[u];
+              tracks.user = user;
+            }
+            if(syncChecker === syncer){
+              console.log('inn i syncer',syncer, syncChecker)
+              
+              res.json(sortList(tracks));
+            }
+          }
+        })
+        console.log('jva er að gerast hér')
+      }
+    }
+  })
+  console.log('done waiting');
+  
+}
+
+function sortList(list){
+  console.log('omg totally búinn að fá öll gögnin mín',list);
+  return list;
+
+}
+
 function addSongToQueue(req, res, next){
   sql.addSongToQueue(xss(req.params.hashName),xss(req.params.trackUri),xss(req.params.trackName),xss(req.params.trackBand),xss(req.params.trackDur), function(error){
     if(error){
