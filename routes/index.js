@@ -27,29 +27,30 @@ function getQueue(req, res, next){
   
   var syncer = 0;
   var syncChecker = 0;
-
+  var resData = [];
   sql.getUsersInQueue(xss(req.params.queueid), function(error, data){
     if(error){
       console.log(error)
     }else{
       syncer = data.rows.length;
-      var tracks = {};
       for(var i = 0; i<data.rows.length; i++){
-        var user = {};
-        user.name = data.rows[i].userinfo_name;
-        sql.getUserSongs(data.rows[i].userinfo_hashnameid, function(error, innerData){
+        
+        sql.getUserSongs(data.rows[i].userinfo_hashnameid, data.rows[i].userinfo_name, function(error, innerData, name){
           if(error){
             console.log(error)
           }else{
+            var user = {};
+            user.name = name;
+            user.tracks = [];
             syncChecker++;
             for(var u = 0; u<innerData.rows.length; u++){
-              user.track = innerData.rows[u];
-              tracks.user = user;
+              user.tracks.push(innerData.rows[u]);
             }
+            resData.push(user);
+            console.log(i,u,resData);
             if(syncChecker === syncer){
               console.log('inn i syncer',syncer, syncChecker)
-              
-              res.json(sortList(tracks));
+              res.json(sortList(resData));
             }
           }
         })
