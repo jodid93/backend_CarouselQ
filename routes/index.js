@@ -23,6 +23,18 @@ router.get('/addSongToQueue/:hashName/:trackUri/:trackName/:trackBand/:trackDur'
 
 router.get('/getQueue/:queueid', getQueue);
 
+router.get('/removeSong/:hashName/:trackUri', removeSong);
+
+function removeSong(req, res, next){
+  sql.removeSong(xss(req.params.hashName), xss(req.params.trackUri), function(error){
+    if(error){
+      console.log(error)
+    }else{
+      res.json({"status":"good"});
+    }
+  })
+}
+
 function getQueue(req, res, next){
   
   var syncer = 0;
@@ -35,12 +47,13 @@ function getQueue(req, res, next){
       syncer = data.rows.length;
       for(var i = 0; i<data.rows.length; i++){
         
-        sql.getUserSongs(data.rows[i].userinfo_hashnameid, data.rows[i].userinfo_name, function(error, innerData, name){
+        sql.getUserSongs(data.rows[i].userinfo_hashnameid, data.rows[i].userinfo_name, data.rows[i].userinfo_songsplayed ,function(error, innerData, name, count){
           if(error){
             console.log(error)
           }else{
             var user = {};
             user.name = name;
+            user.songsplayed = count
             user.tracks = [];
             syncChecker++;
             for(var u = 0; u<innerData.rows.length; u++){
@@ -62,9 +75,37 @@ function getQueue(req, res, next){
   
 }
 
-function sortList(list){
-  console.log('omg totally búinn að fá öll gögnin mín',list);
-  return list;
+//function to compare songsplayed to sort the gathered tracks by users by the user with the least songs already played
+function compare(a,b) {
+  if (a.songsplayed < b.songsplayed)
+    return -1;
+  if (a.songsplayed > b.songsplayed)
+    return 1;
+  return 0;
+}
+
+function sortList(data){
+  console.log('omg totally búinn að fá öll gögnin mín',data);
+
+  data.sort(compare);
+  var maxsongs = 0;
+  for(var i= 0; i<data.length; i++){
+    if(data[i].tracks.length > maxsongs){
+      maxsongs = data[i].tracks.length;
+    }
+  }
+
+  var queue = [];
+
+  for(var i = 0; i< maxsongs; i++){
+    for(var u = 0; u < data.length; u++){
+      if(data[u].tracks[i]){
+        data[u].tracks[i].realUserName = data[u].name;
+        queue.push(data[u].tracks[i]);
+      }
+    }
+  }
+  return queue;
 
 }
 
