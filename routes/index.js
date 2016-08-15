@@ -145,24 +145,29 @@ function doesQueueExist(req, res, next){
   });
 }
 
+//router.get('/addNewUser/:name/:hash/:id/:owner', addNewUser);
+
 function addNewUser(req, res, next){
 
   if(req.params.id.length > 9){
     console.log('stop trying to break my app >:('); 
     res.json({"status": "bad"})
-    res.redirect('/');
+     
   }
 
   sql.addNewUser(xss(req.params.name), xss(req.params.id), xss(req.params.hash), xss(req.params.owner), function(error){
+    console.log('what');
     if(error){
       console.log(error);
     }
+    req.session.regenerate(function (){
+        req.session.user = xss(req.params.hash);
+      });
+    console.log('what 123 ');
+    
+    res.json({"status": "good"})
   });
-  req.session.regenerate(function (){
-      req.session.user = xss(req.params.hash);
-    });
-  res.json({"status": "good"})
-  res.redirect('/');
+  
 }
 
 function initializeDB(req, res, next){
