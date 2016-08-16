@@ -67,11 +67,9 @@ function getQueue(req, res, next){
             }
           }
         })
-        console.log('jva er að gerast hér')
       }
     }
   })
-  console.log('done waiting');
   
 }
 
