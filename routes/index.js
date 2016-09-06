@@ -47,7 +47,7 @@ function getQueue(req, res, next){
       syncer = data.rows.length;
       for(var i = 0; i<data.rows.length; i++){
         
-        sql.getUserSongs(data.rows[i].userinfo_hashnameid, data.rows[i].userinfo_name, data.rows[i].userinfo_songsplayed ,function(error, innerData, name, count){
+        sql.getUserSongs(data.rows[i].userinfo_hashnameid, data.rows[i].userinfo_name, data.rows[i].userinfo_songsplayed, function(error, innerData, name, count){
           if(error){
             console.log(error)
           }else{
