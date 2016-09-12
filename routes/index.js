@@ -34,77 +34,89 @@ function removeSong(req, res, next){
     }
   })
 }
-
 function getQueue(req, res, next){
   
-  var syncer = 0;
-  var syncChecker = 0;
-  var resData = [];
-  sql.getUsersInQueue(xss(req.params.queueid), function(error, data){
+  sql.getQueue(xss(req.params.queueid), function(error,data){
     if(error){
-      console.log(error)
-    }else{
-      syncer = data.rows.length;
-      for(var i = 0; i<data.rows.length; i++){
-        
-        sql.getUserSongs(data.rows[i].userinfo_hashnameid, data.rows[i].userinfo_name, data.rows[i].userinfo_songsplayed, function(error, innerData, name, count){
-          if(error){
-            console.log(error)
-          }else{
-            var user = {};
-            user.name = name;
-            user.songsplayed = count
-            user.tracks = [];
-            syncChecker++;
-            for(var u = 0; u<innerData.rows.length; u++){
-              user.tracks.push(innerData.rows[u]);
-            }
-            resData.push(user);
-            console.log(i,u,resData);
-            if(syncChecker === syncer){
-              console.log('inn i syncer',syncer, syncChecker)
-              res.json(sortList(resData));
-            }
-          }
-        })
-      }
+      console.log('error getting the queue for id' + xss(req.params.queueid),error);
+      return;
     }
+    var users = sortSongsByUsers(data);
+    users = users.sort(sortSongsBySongsPlayed);
+    res.json(getFairQueue(users));
+
   })
   
 }
 
-//function to compare songsplayed to sort the gathered tracks by users by the user with the least songs already played
-function compare(a,b) {
-  if (a.songsplayed < b.songsplayed)
-    return -1;
-  if (a.songsplayed > b.songsplayed)
-    return 1;
-  return 0;
-}
-
-function sortList(data){
-  console.log('omg totally búinn að fá öll gögnin mín',data);
-
-  data.sort(compare);
-  var maxsongs = 0;
-  for(var i= 0; i<data.length; i++){
-    if(data[i].tracks.length > maxsongs){
-      maxsongs = data[i].tracks.length;
+function getFairQueue(users){
+  var queue = [];
+  var maxSongs = 0;
+  for(var i = 0; i<users.length; i++){
+    if(users[i].songs.length > maxSongs){
+      maxSongs = users[i].songs.length 
     }
   }
 
-  var queue = [];
-
-  for(var i = 0; i< maxsongs; i++){
-    for(var u = 0; u < data.length; u++){
-      if(data[u].tracks[i]){
-        data[u].tracks[i].realUserName = data[u].name;
-        queue.push(data[u].tracks[i]);
+  for(var i = 0; i<maxSongs; i++){
+    for(var u = 0; u<users.length; u++ ){
+      if(users[u].songs[i]){
+        queue.push({
+          userName: users[u].userName,
+          userHash: users[u].userHash,
+          songName: users[u].songs[i].songName,
+          songUri: users[u].songs[i].songUri,
+          songBand: users[u].songs[i].songBand,
+          songSkips: users[u].songs[i].songSkips,
+          songDuration: users[u].songs[i].songDuration
+        })
       }
     }
   }
   return queue;
+}
 
+function sortSongsBySongsPlayed(a,b) {
+  if (a.userSongsPlayed < b.userSongsPlayed)
+    return -1;
+  if (a.userSongsPlayed > b.userSongsPlayed)
+    return 1;
+  return 0;
+}
+
+function sortSongsByUsers(data){
+   var users = []
+    for (var i = 0; i< data.rows.length; i++){
+      var user = data.rows[i];
+      var  currUser = users.find(x => x.userHash === user.userinfo_hashnameid)
+      if( currUser){
+         currUser.songs.push(
+          {
+            songName: user.songs_name,
+            songUri: user.songs_uri,
+            songBand: user.song_band,
+            songSkips: user.song_skipvotes,
+            songDuration: user.song_duration
+          }
+        )
+      }else{
+        users.push(
+          { 
+            userName: user.userinfo_name,
+            userHash: user.userinfo_hashnameid,
+            userSongsPlayed: user.userinfo_songsplayed,
+            songs: [{
+              songName: user.songs_name,
+              songUri: user.songs_uri,
+              songBand: user.song_band,
+              songSkips: user.song_skipvotes,
+              songDuration: user.song_duration
+            }]  
+          }
+        )
+      }
+    }
+    return users;
 }
 
 function addSongToQueue(req, res, next){
