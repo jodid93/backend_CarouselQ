@@ -92,7 +92,7 @@ function sortSongsByUsers(data){
       if( currUser){
          currUser.songs.push(
           {
-            songName: user.songs_name,
+            songName: user.song_name,
             songUri: user.songs_uri,
             songBand: user.song_band,
             songSkips: user.song_skipvotes,
@@ -106,7 +106,7 @@ function sortSongsByUsers(data){
             userHash: user.userinfo_hashnameid,
             userSongsPlayed: user.userinfo_songsplayed,
             songs: [{
-              songName: user.songs_name,
+              songName: user.song_name,
               songUri: user.songs_uri,
               songBand: user.song_band,
               songSkips: user.song_skipvotes,
