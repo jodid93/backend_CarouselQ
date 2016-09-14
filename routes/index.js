@@ -170,9 +170,9 @@ function addNewUser(req, res, next){
     if(error){
       console.log(error);
     }
-    req.session.regenerate(function (){
-        req.session.user = xss(req.params.hash);
-      });
+   //req.session.regenerate(function (){
+   //    req.session.user = xss(req.params.hash);
+   //  });
     console.log('what 123 ');
     
     res.json({"status": "good"})
