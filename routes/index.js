@@ -78,9 +78,9 @@ function getFairQueue(users){
 
 function sortSongsBySongsPlayed(a,b) {
   if (a.userSongsPlayed < b.userSongsPlayed)
-    return -1;
-  if (a.userSongsPlayed > b.userSongsPlayed)
     return 1;
+  if (a.userSongsPlayed > b.userSongsPlayed)
+    return -1;
   return 0;
 }
 
